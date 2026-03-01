@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarbApp | Pago Móvil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1 onclick="window.location.href='../index.html'">BarbApp</h1>
+        </div>
+        <nav class="nav-links" id="navLinks">
+            <a href="../index.html">Inicio</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="reservas.html">Reservar</a>
+            <a href="promociones.html">Promociones</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <div class="section">
+        <h2 class="section-title">Pago Móvil</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <!-- Datos Bancarios -->
+            <div style="background: #1a1a1a; padding: 2rem; border-radius: 15px;">
+                <h3 style="color: #c9a959; margin-bottom: 1.5rem;">Datos para el Pago</h3>
+                
+                <div style="margin-bottom: 1rem;">
+                    <p style="color: #b0b0b0;">Banco:</p>
+                    <p style="color: #fff; font-size: 1.2rem;" id="bankName">Banco de Venezuela</p>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <p style="color: #b0b0b0;">Tipo de Cuenta:</p>
+                    <p style="color: #fff;" id="accountType">Corriente</p>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <p style="color: #b0b0b0;">Número de Cuenta:</p>
+                    <p style="color: #fff; font-size: 1.2rem;" id="accountNumber">0102-0123-45-12345678</p>
+                    <button class="btn-small" onclick="copyToClipboard('0102-0123-45-12345678')">
+                        <i class="fas fa-copy"></i> Copiar
+                    </button>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <p style="color: #b0b0b0;">RIF:</p>
+                    <p style="color: #fff;" id="rif">J-12345678-9</p>
+                    <button class="btn-small" onclick="copyToClipboard('J-12345678-9')">
+                        <i class="fas fa-copy"></i> Copiar
+                    </button>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <p style="color: #b0b0b0;">Beneficiario:</p>
+                    <p style="color: #fff;" id="beneficiary">BarbApp C.A.</p>
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <p style="color: #b0b0b0;">Teléfono Pago Móvil:</p>
+                    <p style="color: #fff;" id="bankPhone">0414-1234567</p>
+                    <button class="btn-small" onclick="copyToClipboard('0414-1234567')">
+                        <i class="fas fa-copy"></i> Copiar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Formulario de Pago -->
+            <div style="background: #1a1a1a; padding: 2rem; border-radius: 15px;">
+                <h3 style="color: #c9a959; margin-bottom: 1.5rem;">Registrar Pago</h3>
+                
+                <div style="background: #0f0f0f; padding: 1rem; border-radius: 10px; margin-bottom: 2rem;">
+                    <h4>Resumen de la Reserva</h4>
+                    <p id="bookingService">Corte Clásico</p>
+                    <p id="bookingBarber">Carlos Rodríguez</p>
+                    <p id="bookingDateTime">20/03/2025 - 10:00</p>
+                    <p style="font-size: 1.5rem; color: #c9a959;" id="bookingAmount">$15</p>
+                </div>
+
+                <form onsubmit="processPayment(event)">
+                    <div class="form-group">
+                        <label>Banco de Origen</label>
+                        <select id="paymentBank" required>
+                            <option value="">Selecciona un banco</option>
+                            <option value="Banco de Venezuela">Banco de Venezuela</option>
+                            <option value="Banesco">Banesco</option>
+                            <option value="Mercantil">Mercantil</option>
+                            <option value="Provincial">Provincial</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Número de Referencia</label>
+                        <input type="text" id="reference" required placeholder="Ej: 12345678">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fecha del Pago</label>
+                        <input type="date" id="paymentDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Monto Pagado</label>
+                        <input type="number" id="paymentAmount" required placeholder="15.00" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Comprobante de Pago</label>
+                        <input type="file" id="voucher" accept="image/*,.pdf" required>
+                        <small style="color: #b0b0b0;">Sube una captura de pantalla o PDF del comprobante</small>
+                    </div>
+
+                    <button type="submit" class="btn-book">Registrar Pago</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Instrucciones -->
+        <div style="background: #0f0f0f; padding: 2rem; border-radius: 15px; margin-top: 2rem;">
+            <h3 style="color: #c9a959; margin-bottom: 1rem;">¿Cómo realizar el pago?</h3>
+            <ol style="color: #b0b0b0; line-height: 2;">
+                <li>Ingresa a la aplicación de tu banco</li>
+                <li>Selecciona la opción "Pago Móvil"</li>
+                <li>Ingresa los datos bancarios proporcionados</li>
+                <li>Confirma el pago por el monto exacto de tu servicio</li>
+                <li>Toma una captura de pantalla del comprobante</li>
+                <li>Completa el formulario y sube el comprobante</li>
+                <li>Espera la confirmación del administrador (máx. 2 horas)</li>
+            </ol>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BarbApp</h3>
+                <p>La mejor experiencia en barbería.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 BarbApp. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/pagos.js"></script>
+</body>
+</html>

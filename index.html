@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarbApp | Inicio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>BarbApp</h1>
+        </div>
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Inicio</a>
+            <a href="pages/servicios.html">Servicios</a>
+            <a href="pages/reservas.html">Reservar</a>
+            <a href="pages/promociones.html">Promociones</a>
+            <a href="pages/fidelizacion.html">Mi Lealtad</a>
+            <a href="pages/admin-panel.html">Admin</a>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn-login" onclick="window.location.href='pages/login.html'">
+                <i class="fas fa-user"></i> Iniciar Sesión
+            </button>
+            <button class="btn-register" onclick="window.location.href='pages/registro.html'">
+                Registrarse
+            </button>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Estilo Premium, <br>Hecho a tu Medida</h2>
+            <p>Reserva con los mejores barberos de la ciudad</p>
+            <button class="btn-cta" onclick="window.location.href='pages/reservas.html'">
+                Agenda tu Cita <i class="fas fa-calendar-alt"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Servicios Destacados -->
+    <section class="section">
+        <h2 class="section-title">Servicios Destacados</h2>
+        <div class="services-grid" id="destacadosContainer"></div>
+        <div class="text-center mt-4">
+            <button class="btn-outline" onclick="window.location.href='pages/servicios.html'">
+                Ver Todos los Servicios
+            </button>
+        </div>
+    </section>
+
+    <!-- Próximas Citas (si está logueado) -->
+    <section class="section" id="proximasCitasSection" style="display: none;">
+        <h2 class="section-title">Tus Próximas Citas</h2>
+        <div class="appointments-container" id="proximasCitas"></div>
+    </section>
+
+    <!-- Barberos Destacados -->
+    <section class="section" style="background: #0f0f0f;">
+        <h2 class="section-title">Nuestros Barberos</h2>
+        <div class="barbers-grid" id="barbersContainer"></div>
+    </section>
+
+    <!-- Promociones -->
+    <section class="section">
+        <h2 class="section-title">Promociones Activas</h2>
+        <div class="promotions-grid" id="promocionesContainer"></div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="section" style="background: #111;">
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        <div class="testimonials-slider" id="testimoniosContainer"></div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <i class="fas fa-cut"></i>
+                <h3>5000+</h3>
+                <p>Cortes Realizados</p>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <h3>1500+</h3>
+                <p>Clientes Felices</p>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-star"></i>
+                <h3>4.8</h3>
+                <p>Calificación Promedio</p>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-clock"></i>
+                <h3>5+</h3>
+                <p>Años de Experiencia</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BarbApp</h3>
+                <p>La mejor experiencia en barbería, con reservas fáciles y rápidas.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="pages/servicios.html">Servicios</a></li>
+                    <li><a href="pages/reservas.html">Reservar Cita</a></li>
+                    <li><a href="pages/promociones.html">Promociones</a></li>
+                    <li><a href="pages/fidelizacion.html">Puntos y Lealtad</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Ayuda</h3>
+                <ul>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +58 414-1234567</li>
+                    <li><i class="fas fa-envelope"></i> info@barbapp.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Caracas, Venezuela</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 BarbApp. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

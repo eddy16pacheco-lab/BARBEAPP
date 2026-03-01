@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarbApp | Disponibilidad</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1 onclick="window.location.href='../index.html'">BarbApp</h1>
+        </div>
+        <nav class="nav-links" id="navLinks">
+            <a href="../index.html">Inicio</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="reservas.html">Reservar</a>
+            <a href="promociones.html">Promociones</a>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn-login" onclick="window.location.href='login.html'">
+                <i class="fas fa-user"></i> Iniciar Sesión
+            </button>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="section">
+        <h2 class="section-title">Disponibilidad en Tiempo Real</h2>
+        
+        <div class="calendar-section">
+            <!-- Selector de Barberos -->
+            <h3 style="color: #c9a959; margin-bottom: 1rem;">Selecciona tu Barbero</h3>
+            <div class="barber-selector" id="barberSelector">
+                <div class="barber-card active" onclick="selectBarberCalendar(1)">
+                    <i class="fas fa-cut"></i>
+                    <span>Carlos (Experto)</span>
+                </div>
+                <div class="barber-card" onclick="selectBarberCalendar(2)">
+                    <i class="fas fa-cut"></i>
+                    <span>Miguel (Estilista)</span>
+                </div>
+                <div class="barber-card" onclick="selectBarberCalendar(3)">
+                    <i class="fas fa-cut"></i>
+                    <span>Javier (Master)</span>
+                </div>
+                <div class="barber-card" onclick="selectBarberCalendar(4)">
+                    <i class="fas fa-cut"></i>
+                    <span>Andrés (Profesional)</span>
+                </div>
+            </div>
+
+            <!-- Calendario Semanal -->
+            <h3 style="color: #c9a959; margin: 2rem 0 1rem;">Horarios Disponibles</h3>
+            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                <div class="date-option active" style="text-align: center; padding: 1rem; background: #1f1f1f; border-radius: 10px;">
+                    <span class="day">Lun</span>
+                    <span class="number" style="display: block; font-size: 1.5rem;">17</span>
+                </div>
+                <div class="date-option" style="text-align: center; padding: 1rem; background: #1f1f1f; border-radius: 10px;">
+                    <span class="day">Mar</span>
+                    <span class="number" style="display: block; font-size: 1.5rem;">18</span>
+                </div>
+                <div class="date-option" style="text-align: center; padding: 1rem; background: #1f1f1f; border-radius: 10px;">
+                    <span class="day">Mié</span>
+                    <span class="number" style="display: block; font-size: 1.5rem;">19</span>
+                </div>
+                <div class="date-option" style="text-align: center; padding: 1rem; background: #1f1f1f; border-radius: 10px;">
+                    <span class="day">Jue</span>
+                    <span class="number" style="display: block; font-size: 1.5rem;">20</span>
+                </div>
+                <div class="date-option" style="text-align: center; padding: 1rem; background: #1f1f1f; border-radius: 10px;">
+                    <span class="day">Vie</span>
+                    <span class="number" style="display: block; font-size: 1.5rem;">21</span>
+                </div>
+                <div class="date-option" style="text-align: center; padding: 1rem; background: #1f1f1f; border-radius: 10px;">
+                    <span class="day">Sáb</span>
+                    <span class="number" style="display: block; font-size: 1.5rem;">22</span>
+                </div>
+                <div class="date-option" style="text-align: center; padding: 1rem; background: #1f1f1f; border-radius: 10px;">
+                    <span class="day">Dom</span>
+                    <span class="number" style="display: block; font-size: 1.5rem;">23</span>
+                </div>
+            </div>
+
+            <!-- Horarios -->
+            <div class="time-slots" id="calendarTimeSlots">
+                <div class="time-slot available">09:00</div>
+                <div class="time-slot available">10:00</div>
+                <div class="time-slot available">11:00</div>
+                <div class="time-slot unavailable">12:00</div>
+                <div class="time-slot available">13:00</div>
+                <div class="time-slot available">14:00</div>
+                <div class="time-slot available">15:00</div>
+                <div class="time-slot unavailable">16:00</div>
+                <div class="time-slot available">17:00</div>
+                <div class="time-slot available">18:00</div>
+                <div class="time-slot available">19:00</div>
+            </div>
+
+            <button class="btn-cta" style="margin-top: 2rem; width: 100%;" onclick="window.location.href='reservas.html'">
+                Continuar con la Reserva
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BarbApp</h3>
+                <p>La mejor experiencia en barbería.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 BarbApp. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function selectBarberCalendar(barberId) {
+            document.querySelectorAll('.barber-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            // Simular cambio de disponibilidad
+            showAlert(`Mostrando disponibilidad del barbero seleccionado`, 'info');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarbApp | Servicios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1 onclick="window.location.href='../index.html'">BarbApp</h1>
+        </div>
+        <nav class="nav-links" id="navLinks">
+            <a href="../index.html">Inicio</a>
+            <a href="servicios.html" class="active">Servicios</a>
+            <a href="reservas.html">Reservar</a>
+            <a href="promociones.html">Promociones</a>
+            <a href="fidelizacion.html">Mi Lealtad</a>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn-login" onclick="window.location.href='login.html'">
+                <i class="fas fa-user"></i> Iniciar Sesión
+            </button>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="section">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        <p style="text-align: center; color: #b0b0b0; margin-bottom: 3rem;">
+            Descubre todos los servicios que tenemos para ti
+        </p>
+        
+        <div class="services-grid" id="allServices"></div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BarbApp</h3>
+                <p>La mejor experiencia en barbería.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 BarbApp. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const services = [
+                {
+                    id: 1,
+                    name: 'Corte Clásico',
+                    description: 'Corte de cabello tradicional con acabado perfecto',
+                    price: 15,
+                    duration: 30,
+                    image: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 2,
+                    name: 'Corte + Barba',
+                    description: 'Servicio completo de corte y arreglo de barba',
+                    price: 25,
+                    duration: 45,
+                    image: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 3,
+                    name: 'Afeitado Profesional',
+                    description: 'Afeitado con toalla caliente y productos premium',
+                    price: 20,
+                    duration: 30,
+                    image: 'https://images.unsplash.com/photo-1622287112023-94b7c56ed93a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 4,
+                    name: 'Corte Infantil',
+                    description: 'Corte especial para los más pequeños',
+                    price: 12,
+                    duration: 25,
+                    image: 'https://images.unsplash.com/photo-1612714102836-90cf34ad646d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 5,
+                    name: 'Tratamiento Capilar',
+                    description: 'Hidratación y cuidado para tu cabello',
+                    price: 30,
+                    duration: 40,
+                    image: 'https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 6,
+                    name: 'Tinte y Estilo',
+                    description: 'Cambia tu look con nuestros expertos',
+                    price: 45,
+                    duration: 60,
+                    image: 'https://images.unsplash.com/photo-1560869713-7d0a2946e9b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+                }
+            ];
+
+            const container = document.getElementById('allServices');
+            container.innerHTML = services.map(service => `
+                <div class="service-card">
+                    <div class="service-img" style="background-image: url('${service.image}')"></div>
+                    <div class="service-info">
+                        <h3>${service.name}</h3>
+                        <p>${service.description}</p>
+                        <p><i class="far fa-clock"></i> ${service.duration} minutos</p>
+                        <span class="price">$${service.price}</span>
+                        <button class="btn-book" onclick="selectService(${service.id})">
+                            Reservar Ahora
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        });
+    </script>
+</body>
+</html>
