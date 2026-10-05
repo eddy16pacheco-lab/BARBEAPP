@@ -1,68 +1,94 @@
-# BARBEAPP
-BarbApp es un sistema de gestión integral para barberías desarrollado con tecnologías web modernas. Proporciona una solución completa para la administración de citas, gestión de clientes, pagos en línea y programas de fidelización, todo con una interfaz elegante en tonos oscuros premium.
+# BarbApp — demo
 
-🎯 Objetivo
-Digitalizar y optimizar la gestión de barberías, ofreciendo una experiencia fluida tanto para clientes como para administradores, con herramientas que facilitan la reserva de citas, el seguimiento de servicios y la fidelización de clientes.
+Sistema de gestión para barberías con estética **Dark Premium** (fondo `#0F0F10`, acento dorado `#D4AF37`).
+Esta rama (`react-demo`) es una **versión demo 100 % frontend**: no necesita servidor ni base de datos. Los datos viven en el `localStorage` del navegador y se generan con fechas relativas a "hoy", así que la demo siempre se ve viva.
 
-✨ Características Principales
-👥 Gestión de Usuarios
-Registro y autenticación de usuarios
+> El prototipo HTML/CSS/JS original está intacto en [`legacy/`](legacy/).
 
-Recuperación de contraseña vía email
+## Ejecutar en local
 
-Perfiles personalizados con historial de citas
+Requiere Node 20 o superior.
 
-Edición de datos personales
+```bash
+git clone https://github.com/eddy16pacheco-lab/BARBEAPP.git
+cd BARBEAPP
+git checkout react-demo
+npm install
+npm run dev        # http://localhost:5173
+```
 
-📅 Sistema de Reservas
-Calendario interactivo con disponibilidad en tiempo real
+Otros comandos: `npm test` (reglas de negocio), `npm run build` (genera `dist/`), `npm run preview`.
 
-Selección de servicios con precios y duración
+## Publicarla desde GitHub (opcional)
 
-Asignación de barberos específicos
+1. En GitHub: **Settings → Pages → Source: GitHub Actions**.
+2. Haz push de la rama `react-demo`. El workflow `.github/workflows/deploy.yml` corre las pruebas, compila y publica en `https://<usuario>.github.io/BARBEAPP/`.
 
-Modificación y cancelación de citas (regla de 2 horas)
+La app usa `HashRouter` y `base: './'`, por lo que funciona en cualquier subruta sin configurar redirecciones.
 
-Recordatorios automáticos
+## Cuentas de demostración
 
-💇‍♂️ Catálogo de Servicios
-Visualización de servicios con imágenes descriptivas
+| Rol | Correo | Contraseña |
+|---|---|---|
+| Cliente (historial, puntos Plata, barbero favorito) | `cliente@barbapp.com` | `demo123` |
+| Administrador | `admin@barbapp.com` | `admin123` |
 
-Precios y duración de cada servicio
+El pie de página tiene **Restablecer demo** para volver a los datos iniciales.
 
-Sección de promociones y ofertas especiales
+## Qué incluye
 
-Descuentos para primera cita
+| Módulo | Implementado |
+|---|---|
+| Usuarios | Registro, login, recuperación de contraseña (el "email" se simula con un enlace en pantalla), edición de datos, cambio de contraseña, historial de citas |
+| Reservas | Asistente servicio → barbero → fecha/hora; calendario con disponibilidad calculada en vivo (horarios, descansos, solapes, días libres); reprogramar/cancelar solo hasta **2 h antes** (validado también en la capa de API); recordatorios y notificaciones |
+| Catálogo y promos | Tarjetas de servicio, promociones, **20 % automático en la primera cita**, códigos con restricciones (día, vigencia). Los descuentos no se acumulan: gana el mejor |
+| Pagos | Pago Móvil (banco, teléfono, cédula/RIF, referencia), transferencia, Zelle/otros y efectivo; subida de comprobante PNG/JPG/PDF (máx. 5 MB); estado "Pendiente de validación"; reenvío si es rechazado |
+| Administración | Resumen (ingresos, citas de hoy, clientes nuevos, gráfico 14 días, ranking); calendario global con filtros por estado y barbero; conciliación de pagos (aprobar / rechazar con motivo); CRUD de servicios, barberos + horarios, promociones; tasa de cambio y datos de cobro |
+| Fidelización | Barbero favorito, reseñas 1–5 ★ con comentario, puntos y niveles Bronce / Plata / Oro, insignias |
 
-💳 Pagos en Línea
-Integración con Pago Móvil
+### Lógica de fidelización
 
-Subida de comprobantes de pago (imagen/PDF)
+- **Puntos:** 1 por cada dólar de una cita completada + 10 por reseña. **Niveles:** Bronce 0, Plata 200, Oro 500.
+- **Barbero favorito:** cada cita completada pesa según su antigüedad (vida media de 120 días) y la calificación que dio el cliente (5★ ×1,5 … 1★ ×0,5). Gana el mayor puntaje; el empate lo desempata la visita más reciente. Ver `src/lib/loyalty.js`.
 
-Validación manual por administrador
+## Arquitectura de la demo
 
-Historial de pagos
+```
+src/
+  lib/        Reglas de negocio puras y probadas (disponibilidad, precios, lealtad, validaciones, métricas)
+  api/        "Backend" simulado sobre localStorage: valida igual que lo haría un servidor
+  context/    Auth, toasts y acceso reactivo a los datos
+  components/ Layout, calendario, selector de turnos, formulario de pago, tarjetas
+  pages/      Inicio, servicios, promociones, reserva, perfil, auth y admin/*
+  styles/     Tokens de diseño + componentes + páginas (CSS plano, sin framework)
+tests/        15 pruebas con node:test sobre las reglas de negocio
+```
 
-👑 Panel de Administración
-Gestión completa de servicios y precios
+Las pantallas nunca se saltan las reglas: `api.js` vuelve a comprobar disponibilidad, la regla de 2 horas, permisos de admin y validaciones de pago. Al migrar a un backend real solo se reimplementan esas funciones con `fetch`.
 
-Administración de barberos y horarios
+## Stack recomendado para producción
 
-Calendario global con filtros por estado
+| Capa | Recomendación | Motivo |
+|---|---|---|
+| Frontend | React + Vite, React Router, TanStack Query | Ya está en esta demo; Query aporta caché y refresco de disponibilidad |
+| Backend | Node.js + Express (o Fastify) con TypeScript | Mismo lenguaje que el frontend; las reglas de `src/lib` se pueden compartir |
+| Base de datos | PostgreSQL + Prisma | Integridad relacional y restricciones para evitar reservas dobles |
+| Auth | JWT corto + refresh en cookie `httpOnly`, contraseñas con argon2/bcrypt | Sustituye el hash de demo |
+| Archivos | S3 / Cloudinary con URL firmadas | Los comprobantes no deben guardarse en la base |
+| Email / recordatorios | Resend o SES + cron/BullMQ | Recuperación de contraseña y avisos 24 h antes |
+| Tiempo real | WebSocket/SSE o *polling* con Query | Disponibilidad compartida entre clientes |
+| Despliegue | Vercel/Netlify (front) + Render/Railway/Fly (API y DB) | Simple y económico |
 
-Conciliación de pagos
+Puntos críticos al pasar a producción:
 
-Estadísticas en tiempo real
+1. **Evitar reservas dobles** con una restricción de exclusión en PostgreSQL sobre `(barbero, rango de tiempo)` o una transacción con bloqueo; la validación del cliente no basta.
+2. Guardar fechas en UTC con la zona horaria de la barbería (`America/Caracas`).
+3. Mover la tasa de cambio a una fuente actualizada (BCV) o administrarla a diario.
+4. Validar comprobantes por tipo real de archivo (no solo extensión) y escanearlos.
 
-⭐ Programa de Fidelización
-Identificación automática de barbero favorito
+## Limitaciones conocidas de la demo
 
-Sistema de valoración (1-5 estrellas)
-
-Reseñas post-servicio
-
-Acumulación de puntos canjeables
-
-Niveles de membresía (Bronce, Plata, Oro)
-
-
+- Los datos son por navegador (no se comparten entre dispositivos; sí se sincronizan entre pestañas).
+- No se envían correos ni notificaciones push reales.
+- El hash de contraseña de `src/lib/security.js` es solo de demostración.
+- Las fotos vienen de Unsplash; sin internet se muestra un ícono de respaldo.

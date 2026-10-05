@@ -1,0 +1,37 @@
+:root {
+  --bg: #0f0f10;
+  --surface: #18181b;
+  --raised: #212126;
+  --line: #2e2e35;
+  --line-soft: #26262c;
+
+  --gold: #d4af37;
+  --gold-hi: #e8c766;
+  --gold-lo: #9c7f22;
+  --gold-wash: rgba(212, 175, 55, 0.12);
+
+  --text: #f4f4f5;
+  --muted: #a1a1aa;
+  --faint: #71717a;
+
+  --ok: #4ade80;
+  --warn: #f5b84b;
+  --bad: #f87171;
+  --info: #7db7f5;
+  --silver: #c7ccd6;
+  --bronze: #c58b5a;
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+
+  --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.28);
+  --shadow-lift: 0 18px 44px rgba(0, 0, 0, 0.5);
+
+  --font-display: 'Montserrat', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --header-h: 64px;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}

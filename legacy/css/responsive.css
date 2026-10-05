@@ -1,0 +1,151 @@
+/* Tablets */
+@media (max-width: 1024px) {
+    .hero-content h2 {
+        font-size: 2.8rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .admin-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #1a1a1a;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+        border-bottom: 2px solid #c9a959;
+    }
+    
+    .nav-links.show {
+        display: flex;
+    }
+    
+    .auth-buttons {
+        display: none;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .btn-cta {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+    
+    .section {
+        padding: 3rem 1rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .services-grid,
+    .barbers-grid,
+    .promotions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+    
+    /* Perfil */
+    .profile-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-sidebar {
+        border-right: none;
+        border-bottom: 1px solid #333;
+        padding-bottom: 2rem;
+    }
+    
+    /* Admin */
+    .admin-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .calendar-section {
+        padding: 1rem;
+    }
+    
+    .time-slots {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Tablas */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    .hero-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .time-slots {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .barber-selector {
+        flex-direction: column;
+    }
+    
+    .barber-card {
+        width: 100%;
+    }
+    
+    .modal-content {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+
+/* Landscape */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 4rem 0;
+    }
+}

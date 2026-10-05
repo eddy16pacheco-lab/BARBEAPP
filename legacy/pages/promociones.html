@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarbApp | Promociones</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1 onclick="window.location.href='../index.html'">BarbApp</h1>
+        </div>
+        <nav class="nav-links" id="navLinks">
+            <a href="../index.html">Inicio</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="reservas.html">Reservar</a>
+            <a href="promociones.html" class="active">Promociones</a>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn-login" onclick="window.location.href='login.html'">
+                <i class="fas fa-user"></i> Iniciar Sesión
+            </button>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="section">
+        <h2 class="section-title">Promociones Especiales</h2>
+        
+        <!-- Banner Primera Cita -->
+        <div style="background: linear-gradient(135deg, #c9a959 0%, #b8944a 100%); padding: 3rem; border-radius: 20px; margin-bottom: 3rem; text-align: center;">
+            <h3 style="color: #0a0a0a; font-size: 2rem; margin-bottom: 1rem;">🎉 PRIMERA CITA</h3>
+            <p style="color: #0a0a0a; font-size: 1.3rem; margin-bottom: 1rem;">20% de descuento en tu primer servicio</p>
+            <p style="color: #0a0a0a; font-size: 1.5rem; font-weight: bold;">Código: BIENVENIDO20</p>
+            <button class="btn-cta" style="background: #0a0a0a; color: #c9a959; margin-top: 1rem;" onclick="applyPromo('BIENVENIDO20')">
+                Aplicar Código
+            </button>
+        </div>
+
+        <!-- Grid de Promociones -->
+        <div class="promotions-grid" id="promocionesContainer"></div>
+
+        <!-- Sección de Descuentos por Lealtad -->
+        <div style="margin-top: 4rem;">
+            <h3 style="color: #c9a959; text-align: center; margin-bottom: 2rem;">Beneficios por Lealtad</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+                <div style="background: #1a1a1a; padding: 2rem; border-radius: 15px; text-align: center;">
+                    <i class="fas fa-star" style="font-size: 3rem; color: #c9a959; margin-bottom: 1rem;"></i>
+                    <h4>Nivel Bronce</h4>
+                    <p>0-100 puntos</p>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li>✓ 5% de descuento</li>
+                        <li>✓ Prioridad en reservas</li>
+                    </ul>
+                </div>
+                <div style="background: #1a1a1a; padding: 2rem; border-radius: 15px; text-align: center; border: 2px solid #c9a959;">
+                    <i class="fas fa-star" style="font-size: 3rem; color: #c9a959; margin-bottom: 1rem;"></i>
+                    <h4>Nivel Plata</h4>
+                    <p>101-300 puntos</p>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li>✓ 10% de descuento</li>
+                        <li>✓ Prioridad en reservas</li>
+                        <li>✓ Corte gratis cada 10</li>
+                    </ul>
+                </div>
+                <div style="background: #1a1a1a; padding: 2rem; border-radius: 15px; text-align: center;">
+                    <i class="fas fa-star" style="font-size: 3rem; color: #c9a959; margin-bottom: 1rem;"></i>
+                    <h4>Nivel Oro</h4>
+                    <p>301+ puntos</p>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li>✓ 15% de descuento</li>
+                        <li>✓ Prioridad máxima</li>
+                        <li>✓ Corte gratis cada 8</li>
+                        <li>✓ Producto gratis al mes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BarbApp</h3>
+                <p>La mejor experiencia en barbería.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 BarbApp. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const promotions = [
+                {
+                    id: 1,
+                    title: 'Paquete Mensual',
+                    description: '4 cortes por el precio de 3',
+                    code: 'PAQUETE4X3',
+                    validUntil: '31/03/2025',
+                    image: 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 2,
+                    title: 'Descuento por Referidos',
+                    description: 'Trae un amigo y ambos obtienen 15% off',
+                    code: 'AMIGOS15',
+                    validUntil: '30/06/2025',
+                    image: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+                },
+                {
+                    id: 3,
+                    title: 'Cumpleaños Feliz',
+                    description: '20% de descuento en tu mes de cumpleaños',
+                    code: 'CUMPLE20',
+                    validUntil: 'Todo el año',
+                    image: 'https://images.unsplash.com/photo-1541173439699-748f70b661db?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+                }
+            ];
+
+            const container = document.getElementById('promocionesContainer');
+            container.innerHTML = promotions.map(promo => `
+                <div class="promotion-card">
+                    <div class="service-img" style="background-image: url('${promo.image}')"></div>
+                    <div class="promotion-info">
+                        <h3>${promo.title}</h3>
+                        <p>${promo.description}</p>
+                        <p><strong>Código:</strong> <span style="color: #c9a959;">${promo.code}</span></p>
+                        <p><small>Válido hasta: ${promo.validUntil}</small></p>
+                        <button class="btn-book" onclick="applyPromo('${promo.code}')">
+                            Aplicar Código
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        });
+    </script>
+</body>
+</html>

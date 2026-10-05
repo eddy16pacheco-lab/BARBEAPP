@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarbApp | Panel Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1 onclick="window.location.href='../index.html'">BarbApp</h1>
+        </div>
+        <nav class="nav-links" id="navLinks">
+            <a href="../index.html">Inicio</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="reservas.html">Reservar</a>
+            <a href="admin-panel.html" class="active">Admin</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <div class="section">
+        <h2 class="section-title">Panel de Administración</h2>
+        
+        <!-- Stats Cards -->
+        <div class="admin-stats">
+            <div class="stat-card">
+                <i class="fas fa-calendar-check"></i>
+                <h4 id="todayAppointments">24</h4>
+                <p>Citas Hoy</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-dollar-sign"></i>
+                <h4 id="todayIncome">$520</h4>
+                <p>Ingresos Hoy</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <h4 id="activeBarbers">4</h4>
+                <p>Barberos Activos</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clock"></i>
+                <h4 id="upcomingAppointments">12</h4>
+                <p>Próximas Citas</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-hourglass-half"></i>
+                <h4 id="pendingPayments">8</h4>
+                <p>Pagos Pendientes</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-user-plus"></i>
+                <h4 id="totalClients">156</h4>
+                <p>Clientes Totales</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-chart-line"></i>
+                <h4 id="monthlyIncome">$12.5k</h4>
+                <p>Ingresos Mes</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star"></i>
+                <h4 id="averageRating">4.8</h4>
+                <p>Calificación</p>
+            </div>
+        </div>
+
+        <!-- Pestañas -->
+        <div style="margin-bottom: 2rem;">
+            <button class="btn-book" onclick="showTab('appointments')" style="width: auto; margin-right: 1rem;">Citas</button>
+            <button class="btn-book" onclick="showTab('payments')" style="width: auto; margin-right: 1rem;">Pagos</button>
+            <button class="btn-book" onclick="showTab('services')" style="width: auto; margin-right: 1rem;">Servicios</button>
+            <button class="btn-book" onclick="showTab('barbers')" style="width: auto;">Barberos</button>
+        </div>
+
+        <!-- Tab: Citas -->
+        <div id="tab-appointments" class="tab-content">
+            <div style="background: #1a1a1a; padding: 2rem; border-radius: 15px;">
+                <h3 style="color: #c9a959; margin-bottom: 1rem;">Citas de Hoy</h3>
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Cliente</th>
+                            <th>Servicio</th>
+                            <th>Barbero</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="todayAppointmentsList"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab: Pagos -->
+        <div id="tab-payments" class="tab-content" style="display: none;">
+            <div style="background: #1a1a1a; padding: 2rem; border-radius: 15px;">
+                <h3 style="color: #c9a959; margin-bottom: 1rem;">Pagos Pendientes</h3>
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Servicio</th>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th>Referencia</th>
+                            <th>Comprobante</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pendingPaymentsList"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab: Servicios -->
+        <div id="tab-services" class="tab-content" style="display: none;">
+            <div style="background: #1a1a1a; padding: 2rem; border-radius: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                    <h3 style="color: #c9a959;">Gestión de Servicios</h3>
+                    <button class="btn-book" style="width: auto;" onclick="showAddServiceModal()">
+                        + Nuevo Servicio
+                    </button>
+                </div>
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Servicio</th>
+                            <th>Precio</th>
+                            <th>Duración</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="servicesList"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab: Barberos -->
+        <div id="tab-barbers" class="tab-content" style="display: none;">
+            <div style="background: #1a1a1a; padding: 2rem; border-radius: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                    <h3 style="color: #c9a959;">Gestión de Barberos</h3>
+                    <button class="btn-book" style="width: auto;" onclick="showAddBarberModal()">
+                        + Nuevo Barbero
+                    </button>
+                </div>
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Especialidad</th>
+                            <th>Horario</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="barbersList"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Botones de exportación -->
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end;">
+            <button class="btn-outline" onclick="exportReport('pdf')">
+                <i class="fas fa-file-pdf"></i> Exportar PDF
+            </button>
+            <button class="btn-outline" onclick="exportReport('excel')">
+                <i class="fas fa-file-excel"></i> Exportar Excel
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Nuevo Servicio -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('serviceModal').style.display='none'">&times;</span>
+            <h2 style="color: #c9a959;">Nuevo Servicio</h2>
+            <form onsubmit="saveService(event)">
+                <div class="form-group">
+                    <label>Nombre del Servicio</label>
+                    <input type="text" id="serviceName" required>
+                </div>
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <textarea id="serviceDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Precio ($)</label>
+                    <input type="number" id="servicePrice" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Duración (minutos)</label>
+                    <input type="number" id="serviceDuration" required>
+                </div>
+                <button type="submit" class="btn-book">Guardar Servicio</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Nuevo Barbero -->
+    <div id="barberModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('barberModal').style.display='none'">&times;</span>
+            <h2 style="color: #c9a959;">Nuevo Barbero</h2>
+            <form onsubmit="saveBarber(event)">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="barberName" required>
+                </div>
+                <div class="form-group">
+                    <label>Especialidad</label>
+                    <input type="text" id="barberSpecialty" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" id="barberPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="barberEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Horario</label>
+                    <input type="text" id="barberSchedule" placeholder="Lun-Vie 9:00-18:00" required>
+                </div>
+                <button type="submit" class="btn-book">Guardar Barbero</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BarbApp</h3>
+                <p>La mejor experiencia en barbería.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 BarbApp. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/admin.js"></script>
+    <script>
+        function showTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+            document.getElementById(`tab-${tab}`).style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarbApp | Mi Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1 onclick="window.location.href='../index.html'">BarbApp</h1>
+        </div>
+        <nav class="nav-links" id="navLinks">
+            <a href="../index.html">Inicio</a>
+            <a href="servicios.html">Servicios</a>
+            <a href="reservas.html">Reservar</a>
+            <a href="promociones.html">Promociones</a>
+            <a href="fidelizacion.html">Mi Lealtad</a>
+        </nav>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <div class="section">
+        <h2 class="section-title">Mi Perfil</h2>
+        
+        <div class="profile-section">
+            <div class="profile-sidebar">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 id="userName">Juan Pérez</h3>
+                <p><i class="fas fa-envelope"></i> <span id="userEmail">juan@email.com</span></p>
+                <p><i class="fas fa-phone"></i> <span id="userPhone">+58 412-1234567</span></p>
+                <p><i class="fas fa-star" style="color: #c9a959;"></i> <span id="userPoints">150</span> Puntos</p>
+                <button class="btn-book" style="margin-top: 1rem;" onclick="editProfile()">
+                    <i class="fas fa-edit"></i> Editar Perfil
+                </button>
+                <button class="btn-login" style="margin-top: 1rem; width: 100%;" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </button>
+            </div>
+            
+            <div class="profile-history">
+                <h3>Historial de Citas</h3>
+                <div id="appointmentsHistory"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Barbero Favorito -->
+    <div class="section" style="background: #0f0f0f;">
+        <h2 class="section-title">Mi Barbero Favorito</h2>
+        <div id="favoriteBarber"></div>
+    </div>
+
+    <!-- Sección de Puntos y Lealtad -->
+    <div class="section">
+        <h2 class="section-title">Mis Puntos y Beneficios</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div style="background: #1a1a1a; padding: 2rem; border-radius: 15px; text-align: center;">
+                <h3 style="color: #c9a959;">Puntos Disponibles</h3>
+                <p style="font-size: 3rem; color: #fff;" id="availablePoints">150</p>
+                <p>Te faltan <span style="color: #c9a959;" id="pointsToNext">50</span> puntos para tu próxima recompensa</p>
+            </div>
+            <div style="background: #1a1a1a; padding: 2rem; border-radius: 15px;">
+                <h3 style="color: #c9a959; margin-bottom: 1rem;">Historial de Puntos</h3>
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Concepto</th>
+                            <th>Puntos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pointsHistory"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar Perfil -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('editProfileModal').style.display='none'">&times;</span>
+            <h2 style="color: #c9a959; margin-bottom: 1rem;">Editar Perfil</h2>
+            <form onsubmit="saveProfile(event)">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="editEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" id="editPhone" required>
+                </div>
+                <button type="submit" class="btn-book">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Calificar -->
+    <div id="rateModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('rateModal').style.display='none'">&times;</span>
+            <h2 style="color: #c9a959; margin-bottom: 1rem;">Calificar Servicio</h2>
+            <form onsubmit="submitRating(event)">
+                <div class="form-group">
+                    <label>Calificación</label>
+                    <select id="rating" required>
+                        <option value="5">5 Estrellas - Excelente</option>
+                        <option value="4">4 Estrellas - Muy Bueno</option>
+                        <option value="3">3 Estrellas - Bueno</option>
+                        <option value="2">2 Estrellas - Regular</option>
+                        <option value="1">1 Estrella - Malo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Reseña</label>
+                    <textarea id="review" rows="3" placeholder="Cuéntanos tu experiencia..."></textarea>
+                </div>
+                <button type="submit" class="btn-book">Enviar Calificación</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BarbApp</h3>
+                <p>La mejor experiencia en barbería.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 BarbApp. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/perfil.js"></script>
+</body>
+</html>
